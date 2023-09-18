@@ -13,6 +13,7 @@ public class Demo {
         System.out.println();
 
         list.stream()
+                .filter(n-> n%2==0)
                 .map(n -> n*1.1)
                 .sorted()
                 .forEach(n-> System.out.printf("%.2f, ",n));
