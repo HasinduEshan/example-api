@@ -1,28 +1,32 @@
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 public class Demo {
     public static void main(String[] args) throws Exception {
-        List<Integer> list = Arrays.asList(10, 20, 30, 40, 21, 11, 34, 54, 67, 87, 45, 34);
+        Cat cat = new Cat("Stella",2);
 
-        for (Integer integer:list) {
-            System.out.print(integer+", ");
+        System.out.println(cat.getName());
+
+        Field[] declaredFields = cat.getClass().getDeclaredFields();
+        System.out.println(Arrays.toString(declaredFields));
+
+        for (Field field:declaredFields) {
+            if (field.getName().equals("name")){
+                field.setAccessible(true);
+                field.set(cat,"kitty");
+            }
         }
 
-        System.out.println();
+        System.out.println(cat.getName());
 
-        list.stream()
-                .filter(n -> n%2==0)
-                .map(n -> n*1.1)
-                .sorted()
-                .forEach(n-> System.out.printf("%.2f, ",n));
-
-        Integer reduce = list.stream().reduce(-100, (total, value) -> total + value);  //total = total + value
-
-        System.out.println(reduce);
-        /*System.out.println();
-        list.stream().forEach(n-> System.out.print((n*2)+", "));*/
+        Method[] declaredMethods = cat.getClass().getDeclaredMethods();
+        for (Method method:declaredMethods) {
+            if (method.getName().equals("sound")){
+                method.setAccessible(true);
+                method.invoke(cat);
+                //Cat.eat();
+            }
+        }
     }
 }
