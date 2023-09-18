@@ -1,3 +1,4 @@
+@VeryImportant
 public class Cat {
     private final String name;
     private int age;
@@ -19,10 +20,13 @@ public class Cat {
         this.age = age;
     }
 
+    @PrintCount(times = 3)
     private void sound(){
         System.out.println("meow..!");
     }
 
+
+    @PrintCount
     public static void eat(){
         System.out.println("eating..!");
     }

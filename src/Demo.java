@@ -6,6 +6,12 @@ public class Demo {
     public static void main(String[] args) throws Exception {
         Cat cat = new Cat("Stella",2);
 
+        if (cat.getClass().isAnnotationPresent(VeryImportant.class)){
+            System.out.println("This is very Important Class");
+        }else{
+            System.out.println("This not very Important");
+        }
+
         System.out.println(cat.getName());
 
         Field[] declaredFields = cat.getClass().getDeclaredFields();
@@ -22,9 +28,11 @@ public class Demo {
 
         Method[] declaredMethods = cat.getClass().getDeclaredMethods();
         for (Method method:declaredMethods) {
-            if (method.getName().equals("sound")){
+            if (method.isAnnotationPresent(PrintCount.class)){
                 method.setAccessible(true);
-                method.invoke(cat);
+                for (int i = 0; i < method.getAnnotation(PrintCount.class).times(); i++) {
+                    method.invoke(cat);
+                }
                 //Cat.eat();
             }
         }
