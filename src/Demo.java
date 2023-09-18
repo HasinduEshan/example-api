@@ -11,9 +11,14 @@ public class Demo {
         }
 
         System.out.println();
-        list.stream().forEach(n-> System.out.print(n+", "));
+        Stream<Integer> stream = list.stream();
+
+        Stream<Double> mappedStream = stream.map(n -> n*1.1);
 
         System.out.println();
-        list.stream().forEach(n-> System.out.print((n*2)+", "));
+        mappedStream.forEach(n-> System.out.printf("%.2f, ",n));
+
+        /*System.out.println();
+        list.stream().forEach(n-> System.out.print((n*2)+", "));*/
     }
 }
