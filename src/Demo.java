@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class Demo {
@@ -12,8 +13,23 @@ public class Demo {
 
         System.out.println();
 
+        /*Predicate<Integer> predicate = new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer n) {
+                return n%2==0;
+            }
+        };*/
+
+        /*Predicate<Integer> predicate = (Integer n) ->{
+                return n%2==0;
+        };*/
+
+//        Predicate<Integer> predicate = (Integer n) ->n%2==0;
+
+        Predicate<Integer> predicate = n -> n%2==0;
+
         list.stream()
-                .filter(n-> n%2==0)
+                .filter(predicate) //n -> n%2==0
                 .map(n -> n*1.1)
                 .sorted()
                 .forEach(n-> System.out.printf("%.2f, ",n));
