@@ -13,27 +13,15 @@ public class Demo {
 
         System.out.println();
 
-        /*Predicate<Integer> predicate = new Predicate<Integer>() {
-            @Override
-            public boolean test(Integer n) {
-                return n%2==0;
-            }
-        };*/
-
-        /*Predicate<Integer> predicate = (Integer n) ->{
-                return n%2==0;
-        };*/
-
-//        Predicate<Integer> predicate = (Integer n) ->n%2==0;
-
-        Predicate<Integer> predicate = n -> n%2==0;
-
         list.stream()
-                .filter(predicate) //n -> n%2==0
+                .filter(n -> n%2==0)
                 .map(n -> n*1.1)
                 .sorted()
                 .forEach(n-> System.out.printf("%.2f, ",n));
 
+        Integer reduce = list.stream().reduce(-100, (total, value) -> total + value);  //total = total + value
+
+        System.out.println(reduce);
         /*System.out.println();
         list.stream().forEach(n-> System.out.print((n*2)+", "));*/
     }
